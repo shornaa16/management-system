@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // রেন্ডারের প্রক্সি ট্রাস্ট করার জন্য এটি যোগ করুন
+        $middleware->trustProxies(at: '*');
+
         // Redirect unauthenticated users to /login (instead of Laravel's default)
         $middleware->redirectGuestsTo('/login');
         // Authenticated users land on the dashboard
